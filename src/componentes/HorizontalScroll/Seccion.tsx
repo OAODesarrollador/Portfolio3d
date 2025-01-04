@@ -21,8 +21,8 @@ export const Section: React.FC<SectionProps> = ({ title, content, color }) => {
         flexShrink: 0
       }}
       initial={{ opacity: 0 }}
-      whileInView={{ opacity: 0.5 }}
-      transition={{ duration: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 2 }}
     >
       <h2>{title}</h2>
       <div>

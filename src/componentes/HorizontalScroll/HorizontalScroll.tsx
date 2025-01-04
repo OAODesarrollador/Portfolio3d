@@ -27,47 +27,25 @@ export const HorizontalScroll: React.FC = () => {
       const sectionWidth = window.innerWidth
       const currentScroll = element.scrollLeft
       const maxScroll = element.scrollWidth - element.clientWidth
-      
-      // Detectar dirección del scroll
       const scrollingUp = e.deltaY < 0
 
-      // Obtener elemento de contacto
-      const contactSection = document.querySelector('.contact')
-      if (!contactSection) return
-
-      // Obtener la posición actual de scroll vertical
-      const windowScrollY = window.scrollY
-      const contactTop = contactSection.getBoundingClientRect().top + windowScrollY
-
-      // Si estamos en la sección de contacto y scrolleamos hacia arriba
-      if (windowScrollY > 0 && scrollingUp) {
-        if (windowScrollY <= contactTop) {
-          // Volver al scroll horizontal
-          window.scrollTo(0, 0)
-          element.scrollTo({
-            left: maxScroll,
-            behavior: 'smooth'
-          })
-          e.preventDefault()
+      // Si estamos en la sección horizontal
+      if (element.contains(e.target as Node)) {
+        // Lógica existente para scroll horizontal...
+        if (currentScroll >= maxScroll - 10 && !scrollingUp) {
+          return // Permitir scroll vertical hacia Contact
         }
-        return
+
+        e.preventDefault()
+        const targetScroll = Math.round(currentScroll / sectionWidth) * sectionWidth
+
+        element.scrollTo({
+          left: scrollingUp 
+            ? Math.max(targetScroll - sectionWidth, 0)
+            : Math.min(targetScroll + sectionWidth, maxScroll),
+          behavior: 'smooth'
+        })
       }
-
-      // Si estamos en la última sección horizontal y scrolleamos hacia abajo
-      if (currentScroll >= maxScroll - 10 && !scrollingUp) {
-        return // Permitir scroll vertical
-      }
-
-      // Para todo lo demás, manejar scroll horizontal
-      e.preventDefault()
-      const targetScroll = Math.round(currentScroll / sectionWidth) * sectionWidth
-
-      element.scrollTo({
-        left: scrollingUp 
-          ? Math.max(targetScroll - sectionWidth, 0)
-          : Math.min(targetScroll + sectionWidth, maxScroll),
-        behavior: 'smooth'
-      })
     }
 
     // Manejar scroll vertical
@@ -82,12 +60,12 @@ export const HorizontalScroll: React.FC = () => {
     }
 
     element.addEventListener('scroll', handleScroll)
-    element.addEventListener('wheel', handleWheel, { passive: false })
+    document.addEventListener('wheel', handleWheel, { passive: false })
     window.addEventListener('scroll', handleWindowScroll)
     
     return () => {
       element.removeEventListener('scroll', handleScroll)
-      element.removeEventListener('wheel', handleWheel)
+      document.removeEventListener('wheel', handleWheel)
       window.removeEventListener('scroll', handleWindowScroll)
     }
   }, [])

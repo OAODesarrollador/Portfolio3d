@@ -1,5 +1,6 @@
 //import React from 'react'
 import { Navbar } from './componentes/Navbar/navbar'
+import { Home } from './componentes/Home/Home'
 import { HorizontalScroll } from './componentes/HorizontalScroll/HorizontalScroll'
 import { Contact } from './componentes/Contacto/Contacto'
 import { Footer } from './componentes/Footer/Footer'
@@ -11,6 +12,7 @@ function App() {
     <div className="App">
       <Background3D />
       <Navbar />
+      <Home />
       <HorizontalScroll />
       <Contact />
       <Footer />
