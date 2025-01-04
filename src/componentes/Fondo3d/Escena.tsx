@@ -9,14 +9,14 @@ export const Scene = () => {
 
   useFrame((_state, delta) => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += delta * 0.3
+      modelRef.current.rotation.y += delta * 0.2
     }
   })
 
   return (
     <>
       <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
+      <directionalLight position={[10, 10, 5]} intensity={0.5} />
       <primitive 
         ref={modelRef}
         object={scene} 

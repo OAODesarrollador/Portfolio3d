@@ -3,15 +3,16 @@ import { motion } from 'framer-motion'
 
 interface SectionProps {
   title: string
+  content: string
   color: string
 }
 
-export const Section: React.FC<SectionProps> = ({ title }) => {
+export const Section: React.FC<SectionProps> = ({ title, content, color }) => {
   return (
     <motion.div
-      className="section"
+      className="seccion"
       style={{
-        
+        backgroundColor: color,
         width: '100vw',
         height: '100vh',
         display: 'flex',
@@ -19,11 +20,14 @@ export const Section: React.FC<SectionProps> = ({ title }) => {
         justifyContent: 'center',
         flexShrink: 0
       }}
-      initial={{ opacity: 0.5 }}
+      initial={{ opacity: 0 }}
       whileInView={{ opacity: 0.5 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0 }}
     >
       <h2>{title}</h2>
+      <div>
+        <p>{content}</p>
+      </div>
     </motion.div>
   )
 }
