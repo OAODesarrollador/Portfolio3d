@@ -1,4 +1,3 @@
-/* Estilos existentes ... */
 
 .home {
   width: 100vw;
@@ -9,6 +8,7 @@
   text-align: center;
   scroll-snap-align: start;
   position: relative;
+  
 }
 
 .home-content {
@@ -60,9 +60,11 @@
 
 /* Ajustamos el scroll snap para toda la página */
 html, body {
+  background-color: transparent !important;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  color: rgb(250, 250, 250);
 }
 
 .scroll-container {
@@ -71,4 +73,15 @@ html, body {
 
 .contact {
   scroll-snap-align: start;
+}
+
+canvas {
+  all: unset; /* Elimina cualquier estilo heredado */
+  display: block; /* Asegura que se comporte como un bloque */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Asegura que quede detrás de otros elementos */
 }

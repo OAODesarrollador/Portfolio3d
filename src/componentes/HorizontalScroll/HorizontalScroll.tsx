@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import { Section } from './Seccion'
 import './HorizontalScroll.css'
 
+
 export const HorizontalScroll: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isLastSection, setIsLastSection] = useState(false)
@@ -11,6 +12,7 @@ export const HorizontalScroll: React.FC = () => {
     const element = containerRef.current
     if (!element) return
 
+    
     const handleScroll = () => {
       if (!element) return
       
@@ -79,9 +81,9 @@ export const HorizontalScroll: React.FC = () => {
       }}
     >
       <div className="scroll-content">
-        <Section title="Section 1" content="Content for section 1" color="#ff6b6b" />
-        <Section title="Section 2" content="Content for section 2" color="#4ecdc4" />
-        <Section title="Section 3" content="Content for section 3" color="#45b7d1" />
+        <Section title="Seccion 1" content="lorem ipsum" color="#4d5656" />
+        <Section title="Seccion 2" content="Lorem ipsum" color="#4d5656" />
+        <Section title="Seccion 3" content="Lorem ipsum" color="#4d5656" />
       </div>
     </div>
   )

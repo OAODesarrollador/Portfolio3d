@@ -2,20 +2,21 @@
   width: 100vw;
   height: 100vh;
   overflow-x: scroll;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: none; /* Oculta el scroll para navegadores modernos */
+  -ms-overflow-style: none; /* Oculta el scroll para IE/Edge */
+  display: flex;
   position: relative;
 }
 
 .scroll-container::-webkit-scrollbar {
-  display: none;
+  display: none; /* Oculta el scroll para navegadores basados en WebKit */
 }
 
 .scroll-content {
   display: flex;
-  flex-direction: row;
-  width: 300vw;
+  width: max-content; /* Ajusta el ancho según el contenido */
   height: 100%;
 }
 
@@ -27,25 +28,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-}
-
-.contact {
-  position: relative;
-  z-index: 1;
-  margin-top: 0;
-  min-height: 70vh;
-  scroll-snap-align: start;
-}
-
-/* Asegurar que el contenedor principal permita scroll */
-html, body {
-  scroll-snap-type: y mandatory;
-  overflow-x: hidden;
-}
-
-/* Ajustar el comportamiento de scroll para el contenedor principal */
-#root {
-  overflow-x: hidden;
-  position: relative;
 }

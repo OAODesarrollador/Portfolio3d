@@ -3,9 +3,9 @@ import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 
-export const Scene = () => {
+export const Escena = () => {
   const modelRef = useRef<THREE.Group>(null)
-  const { scene } = useGLTF('/public/logosolo3.glb')
+  const { scene: logo } = useGLTF('/public/logosolo3.glb')
 
   useFrame((_state, delta) => {
     if (modelRef.current) {
@@ -19,9 +19,9 @@ export const Scene = () => {
       <directionalLight position={[10, 10, 5]} intensity={0.5} />
       <primitive 
         ref={modelRef}
-        object={scene} 
-        scale={110} // Ajusta según el tamaño de tu modelo
-        position={[0, -1, 0]} // Ajusta según necesites
+        object={logo} 
+        scale={100} // Ajusta según el tamaño de tu modelo
+        position={[3, -1.5, 0]} // Ajusta según necesites
       />
     </>
   )
