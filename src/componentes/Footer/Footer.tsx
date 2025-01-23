@@ -6,9 +6,9 @@ export const Footer: React.FC = () => {
       <div className="footer-content">
         <p>© 2024 Your Company. All rights reserved.</p>
         <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '2rem' }}>
-          <a href="#privacy">Privacy Policy</a>
-          <a href="#terms">Terms of Service</a>
-          <a href="#contact">Contact Us</a>
+          <a href="#Linkedin">Linkedin</a>
+          <a href="#Github">Github</a>
+          <a href="#Instagram">Instagram</a>
         </div>
       </div>
     </footer>
