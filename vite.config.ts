@@ -6,5 +6,9 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     include: ['three', 'bootstrap'],
+  },
+  base: './',
+  build: {
+    chunkSizeWarningLimit: 1000
   }
 })
