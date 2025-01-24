@@ -30,7 +30,7 @@ export const Escena = () => {
       const progressInSection = (scrollY % sectionHeight) / sectionHeight;
 
       // Definir posiciones por sección: derecha, izquierda, derecha...
-      const positions = [4, -4, 4]; // Repetir patrón
+      const positions = [4, -5, 4]; // Repetir patrón
 
       // Determinar posición inicial y final basadas en la sección actual
       const startX = positions[currentSectionIndex % positions.length];
