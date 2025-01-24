@@ -5,7 +5,7 @@ import * as THREE from 'three'
 
 export const Escena = () => {
   const modelRef = useRef<THREE.Group>(null)
-  const { scene: logo } = useGLTF('/public/logosolo3.glb')
+  const { scene: logo } = useGLTF('/logosolo3.glb')
   const [scrollY, setScrollY] = useState(0)
 
   useEffect(() => {
