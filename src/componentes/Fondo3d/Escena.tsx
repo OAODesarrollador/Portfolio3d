@@ -1,46 +1,54 @@
-import { useRef, useState, useEffect } from 'react'
-import { useFrame } from '@react-three/fiber'
-import { useGLTF } from '@react-three/drei'
-import * as THREE from 'three'
+import { useRef, useState, useEffect } from 'react';
+import { useFrame } from '@react-three/fiber';
+import { useGLTF } from '@react-three/drei';
+import * as THREE from 'three';
 
 export const Escena = () => {
-  const modelRef = useRef<THREE.Group>(null)
-  const { scene: logo } = useGLTF('/logosolo3.glb')
-  const [scrollY, setScrollY] = useState(0)
+  const modelRef = useRef<THREE.Group>(null);
+  const { scene: logo } = useGLTF('/logosolo3.glb');
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-    
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    const handleScroll = () => setScrollY(window.scrollY);
 
-  useFrame(({ viewport }) => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useFrame(() => {
     if (modelRef.current) {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight
-      const scrollProgress = scrollY / maxScroll
+      // Altura total del documento menos la altura de la ventana
+      //const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 
-      // Posicionamiento dinámico basado en el viewport
-      const rightEdge = viewport.width / 4  // Ajuste fino del borde derecho
+      // Altura de la ventana para identificar el inicio de cada sección
+      const sectionHeight = window.innerHeight;
 
-      // Cálculo de movimiento más preciso
-      const horizontalRange = 8
-      const oscillationFactor = Math.sin(scrollProgress * Math.PI) 
-      const targetX = rightEdge - (horizontalRange * oscillationFactor)
+      // Cálculo del índice de la sección actual
+      const currentSectionIndex = Math.floor(scrollY / sectionHeight);
 
-      // Interpolación suave con amortiguación ajustada
-      modelRef.current.position.x = THREE.MathUtils.lerp(
-        modelRef.current.position.x, 
-        targetX, 
-        0.01
-      )
+      // Detectar si estamos cerca del inicio de la próxima sección (cuando ocupa toda la pantalla)
+      const progressInSection = (scrollY % sectionHeight) / sectionHeight;
 
-      // Rotación más suave
-      modelRef.current.rotation.y += 0.01
+      // Definir posiciones por sección: derecha, izquierda, derecha...
+      const positions = [4, -4, 4]; // Repetir patrón
+
+      // Determinar posición inicial y final basadas en la sección actual
+      const startX = positions[currentSectionIndex % positions.length];
+      const endX = positions[(currentSectionIndex + 1) % positions.length];
+
+      // Movimiento progresivo basado en el progreso dentro de la sección
+      const targetX =
+        progressInSection >= 1 // Si hemos alcanzado la próxima sección, saltar a su posición
+          ? endX
+          : THREE.MathUtils.lerp(startX, endX, progressInSection);
+
+      // Movimiento suave hacia la posición objetivo
+      modelRef.current.position.x += (targetX - modelRef.current.position.x) * 0.1;
+
+      // Rotación constante sobre el eje Y
+      modelRef.current.rotation.y += 0.01;
     }
-  })
+  });
 
   return (
     <>
@@ -50,8 +58,8 @@ export const Escena = () => {
         ref={modelRef}
         object={logo}
         scale={90}
-        position={[0, -1, 0]} // Ajuste de posición inicial
+        position={[4, -1, 0]} // Posición inicial ajustada al lado derecho
       />
     </>
-  )
-}
+  );
+};
