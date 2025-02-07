@@ -7,6 +7,7 @@
   scrollbar-width: none; /* Oculta el scroll para navegadores modernos */
   -ms-overflow-style: none; /* Oculta el scroll para IE/Edge */
   position: relative;
+  z-index: 0;
 }
 
 .scroll-container::-webkit-scrollbar {
@@ -19,12 +20,3 @@
   height: 100%;
 }
 
-/*.section {
-  scroll-snap-align: start;
-  width: 100vw;
-  height: 100vh;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
