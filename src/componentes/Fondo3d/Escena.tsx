@@ -24,47 +24,71 @@ export const Escena = () => {
       const progressInSection = (scrollY % sectionHeight) / sectionHeight;
 
       // Posiciones alternas (derecha, izquierda, derecha...)
-      const positions = [4, -4, 4];
+      const positions = [4, -5, 4];
       const startX = positions[currentSectionIndex % positions.length];
+      
       const endX = positions[(currentSectionIndex + 1) % positions.length];
 
       // Escalas alternas (pequeño, grande, pequeño...)
-      const scales = [3, 5, 3];
-      const startScale = scales[currentSectionIndex % scales.length];
-      console.log(startScale, scales.length, currentSectionIndex)
-      const endScale = scales[(currentSectionIndex + 1) % scales.length];
-      console.log(endScale,  scales.length, currentSectionIndex)
-      // Interpolación suave de posición
-      const targetX = THREE.MathUtils.lerp(startX, endX, progressInSection);
-      modelRef.current.position.x += (targetX - modelRef.current.position.x) * 0.01;
-
-      // Interpolación suave de escala
-      const targetScale = THREE.MathUtils.lerp(startScale, endScale, progressInSection);
-      modelRef.current.scale.set(targetScale, targetScale, targetScale);
-
-      // Rotación constante
-      //modelRef.current.rotation.y += 0.005;
-      const cameraTargetZ = 3 + progressInSection * 6; // Ajuste de profundidad
-      camera.position.z += (cameraTargetZ - camera.position.z) * 0.005;
-     
-      const cameraTargetY = 1.5 - progressInSection * 1.2; // Ajuste de altura
-      camera.position.y += (cameraTargetY - camera.position.y) * 0.01;
+      //const scales = [3, 3 , 3];
+      //const startScale = scales[currentSectionIndex % scales.length];
       
-      camera.lookAt(modelRef.current.position);
+      //const endScale = scales[(currentSectionIndex + 1) % scales.length];
+      
+      
+      // Interpolación suave de posición
+      
+      const targetX = THREE.MathUtils.lerp(startX, endX, progressInSection);
+      
+      
+      modelRef.current.position.x += (targetX - modelRef.current.position.x) * 0.02;
+      
+      //  escala
 
+      modelRef.current.scale.set(3, 3, 3);
+      const cameraTargetZ = 6 + progressInSection * 3; // Ajuste de profundidad
+      camera.position.z += (cameraTargetZ - camera.position.z) * 0.01;
+      
+      
+      //const cameraTargetY = 1.5 + progressInSection * 1.1; // Ajuste de altura
+      //camera.position.y += (cameraTargetY - camera.position.y) * 0.01;
+      //camera.position.y = 1.1 ;
+      
+      //camera.lookAt(modelRef.current.position);
+      //console.log(modelRef.current.rotation.y);
+      
+      // Rotacion que funciona
+
+      //if (currentSectionIndex % 2 === 1 && modelRef.current.rotation.y <= 4.9 && modelRef.current.rotation.y > 1.2) { // Si estamos en la sección impar y la rotación es menor que 4.8> 4.81 && modelRef.current.rotation.y > 1.5) {
+      //  modelRef.current.rotation.y -= 0.05;
+      //  console.log("==1",modelRef.current.rotation.y);
+      //} if ( currentSectionIndex % 2 !== 1 && modelRef.current.rotation.y <= 4.8 && modelRef.current.rotation.y >= 1.10) { // Si estamos en la sección par y la rotación es mayor que -4.8
+      //  modelRef.current.rotation.y += 0.05;
+      //  console.log(">< 1",modelRef.current.rotation.y);
+      //}
+      
+      if (currentSectionIndex % 2 === 1 && modelRef.current.rotation.y <= 0.55 && modelRef.current.rotation.y >= -1.56) { // Si estamos en la sección impar y la rotación es menor que 4.8> 4.81 && modelRef.current.rotation.y > 1.5) {
+          modelRef.current.rotation.y += 0.01;
+          console.log("==1",(modelRef.current.rotation.y*10));
+          console.log("currentSectionIndex: ",currentSectionIndex);
+        } if ( currentSectionIndex % 2 !== 1 && modelRef.current.rotation.y <= 0.56 && modelRef.current.rotation.y >= -1.50) { // Si estamos en la sección par y la rotación es mayor que -4.8
+          modelRef.current.rotation.y -= 0.01;
+          console.log(">< 1: ",modelRef.current.rotation.y);
+          console.log("currentSectionIndex: ",currentSectionIndex);
+      }
     }
   });
 
   return (
     <> 
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 10, 15]} intensity={0.5} />
+      <ambientLight intensity={0.9} />
+      <directionalLight position={[1, 1, 100]} intensity={0.5} />
       <primitive 
         ref={modelRef}
         object={logo}
-        scale={90}
-        position={[4, -1, 0]} 
-        rotation={[0, -0.3, 0]}
+        scale={80}
+        position={[0,0.5, 0]} 
+        rotation={[0, -1.5, 0.09]}
       />
     </> 
   );
