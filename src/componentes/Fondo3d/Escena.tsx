@@ -28,13 +28,6 @@ export const Escena = () => {
       const startX = positions[currentSectionIndex % positions.length];
       
       const endX = positions[(currentSectionIndex + 1) % positions.length];
-
-      // Escalas alternas (pequeño, grande, pequeño...)
-      //const scales = [3, 3 , 3];
-      //const startScale = scales[currentSectionIndex % scales.length];
-      
-      //const endScale = scales[(currentSectionIndex + 1) % scales.length];
-      
       
       // Interpolación suave de posición
       
@@ -49,29 +42,11 @@ export const Escena = () => {
       const cameraTargetZ = 6 + progressInSection * 3; // Ajuste de profundidad
       camera.position.z += (cameraTargetZ - camera.position.z) * 0.01;
       
-      
-      //const cameraTargetY = 1.5 + progressInSection * 1.1; // Ajuste de altura
-      //camera.position.y += (cameraTargetY - camera.position.y) * 0.01;
-      //camera.position.y = 1.1 ;
-      
-      //camera.lookAt(modelRef.current.position);
-      //console.log(modelRef.current.rotation.y);
-      
-      // Rotacion que funciona
-
-      //if (currentSectionIndex % 2 === 1 && modelRef.current.rotation.y <= 4.9 && modelRef.current.rotation.y > 1.2) { // Si estamos en la sección impar y la rotación es menor que 4.8> 4.81 && modelRef.current.rotation.y > 1.5) {
-      //  modelRef.current.rotation.y -= 0.05;
-      //  console.log("==1",modelRef.current.rotation.y);
-      //} if ( currentSectionIndex % 2 !== 1 && modelRef.current.rotation.y <= 4.8 && modelRef.current.rotation.y >= 1.10) { // Si estamos en la sección par y la rotación es mayor que -4.8
-      //  modelRef.current.rotation.y += 0.05;
-      //  console.log(">< 1",modelRef.current.rotation.y);
-      //}
-      
-      if (currentSectionIndex % 2 === 1 && modelRef.current.rotation.y <= 0.55 && modelRef.current.rotation.y >= -1.56) { // Si estamos en la sección impar y la rotación es menor que 4.8> 4.81 && modelRef.current.rotation.y > 1.5) {
+      if (currentSectionIndex % 2 === 1 && modelRef.current.rotation.y <= 0.55 && modelRef.current.rotation.y >= -1.6) { // Si estamos en la sección impar y la rotación es menor que 4.8> 4.81 && modelRef.current.rotation.y > 1.5) {
           modelRef.current.rotation.y += 0.01;
           console.log("==1",(modelRef.current.rotation.y*10));
           console.log("currentSectionIndex: ",currentSectionIndex);
-        } if ( currentSectionIndex % 2 !== 1 && modelRef.current.rotation.y <= 0.56 && modelRef.current.rotation.y >= -1.50) { // Si estamos en la sección par y la rotación es mayor que -4.8
+        } if ( currentSectionIndex % 2 !== 1 && modelRef.current.rotation.y <= 0.56 && modelRef.current.rotation.y >= -1.36) { // Si estamos en la sección par y la rotación es mayor que -4.8
           modelRef.current.rotation.y -= 0.01;
           console.log(">< 1: ",modelRef.current.rotation.y);
           console.log("currentSectionIndex: ",currentSectionIndex);
@@ -88,7 +63,7 @@ export const Escena = () => {
         object={logo}
         scale={80}
         position={[0,0.5, 0]} 
-        rotation={[0, -1.5, 0.09]}
+        rotation={[0, -1.2, 0.09]}
       />
     </> 
   );

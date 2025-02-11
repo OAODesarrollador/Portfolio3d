@@ -36,7 +36,10 @@ export const HorizontalScroll: React.FC = () => {
         // Lógica existente para scroll horizontal...
         if (currentScroll >= maxScroll - 10 && !scrollingUp) {
           return // Permitir scroll vertical hacia Contact
+        } else if (currentScroll <= 10 && scrollingUp) {
+          return // Permitir scroll vertical hacia Home
         }
+
 
         e.preventDefault()
         const targetScroll = Math.round(currentScroll / sectionWidth) * sectionWidth
